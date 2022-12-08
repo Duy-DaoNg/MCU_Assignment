@@ -31,6 +31,9 @@ int FSM_Pedestrian_State;
 #define MANUAL_GREEN 	4
 #define MANUAL_YEL 		5
 #define BLACK_HOLE		6
+#define HAND_RED		7
+#define HAND_GREEN		8
+#define HAND_YEL		9
 #define IDLE			0
 #define WORK			1
 ////////////////Buzzer//////////////////

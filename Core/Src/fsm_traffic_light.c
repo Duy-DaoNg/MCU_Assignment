@@ -35,7 +35,7 @@ void FSM_Traffic_Light_Row(){
 
 			setTimer1(TIMER1_SECOND_DURATION * TICK);
 		}
-		/* Check if button state is pressed */
+		/* Check if button1 is pressed --> move to MANUAL_MOD*/
 		if(buttonPressed_flag[0]){
 			/* If button is pressed --> move to MANUAL state */
 			buttonPressed_flag[0] = 0;
@@ -43,6 +43,13 @@ void FSM_Traffic_Light_Row(){
 			FSM_Traffic_Light_State_Row = MANUAL_RED;
 			FSM_Traffic_Light_State_Col = BLACK_HOLE;
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
+			resetAllButtonState();
+		}
+		/* Check if button2 is pressed --> move to HAND_RED */
+		if(buttonPressed_flag[1]){
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_RED;
+			FSM_Traffic_Light_State_Col = HAND_GREEN;
 			resetAllButtonState();
 		}
 		break;
@@ -67,6 +74,12 @@ void FSM_Traffic_Light_Row(){
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
 			resetAllButtonState();
 		}
+		if(buttonPressed_flag[1]){
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_RED;
+			FSM_Traffic_Light_State_Col = HAND_GREEN;
+			resetAllButtonState();
+		}
 		break;
 	case AUTO_YEL:
 		if(timer1Flag == 1){
@@ -87,6 +100,12 @@ void FSM_Traffic_Light_Row(){
 			FSM_Traffic_Light_State_Row = MANUAL_RED;
 			FSM_Traffic_Light_State_Col = BLACK_HOLE;
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
+			resetAllButtonState();
+		}
+		if(buttonPressed_flag[1]){
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_RED;
+			FSM_Traffic_Light_State_Col = HAND_GREEN;
 			resetAllButtonState();
 		}
 		break;
@@ -179,8 +198,65 @@ void FSM_Traffic_Light_Row(){
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
 		}
 		break;
+	case HAND_RED:
+		if(buttonPressed_flag[1]){
+			/* Move to next state of HAND MODE */
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_GREEN;
+			FSM_Traffic_Light_State_Col = HAND_RED;
+			resetAllButtonState();
+		}
+		if(buttonPressed_flag[0]){
+			/* BACK TO AUTO_RED */
+			buttonPressed_flag[0] = 0;
+			Set_TL_Time = red_time;
+			traffic_light_remain_time_row = red_time;
+			To_Default_State = 1;
+			FSM_Traffic_Light_State_Row = AUTO_RED;
+			FSM_Traffic_Light_State_Col = BLACK_HOLE;
+			setTimer1(TIMER1_SECOND_DURATION * TICK);
+		}
+		break;
+	case HAND_GREEN:
+		if(buttonPressed_flag[1]){
+			/* Move to next state of HAND MODE */
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_YEL;
+			FSM_Traffic_Light_State_Col = HAND_YEL;
+			resetAllButtonState();
+		}
+		if(buttonPressed_flag[0]){
+			/* BACK TO AUTO_RED */
+			buttonPressed_flag[0] = 0;
+			Set_TL_Time = red_time;
+			traffic_light_remain_time_row = red_time;
+			To_Default_State = 1;
+			FSM_Traffic_Light_State_Row = AUTO_RED;
+			FSM_Traffic_Light_State_Col = BLACK_HOLE;
+			setTimer1(TIMER1_SECOND_DURATION * TICK);
+		}
+		break;
+	case HAND_YEL:
+		if(buttonPressed_flag[1]){
+			/* Move to next state of HAND MODE */
+			buttonPressed_flag[1] = 0;
+			FSM_Traffic_Light_State_Row = HAND_RED;
+			FSM_Traffic_Light_State_Col = HAND_GREEN;
+			resetAllButtonState();
+		}
+		if(buttonPressed_flag[0]){
+			/* BACK TO AUTO_RED */
+			buttonPressed_flag[0] = 0;
+			Set_TL_Time = red_time;
+			traffic_light_remain_time_row = red_time;
+			To_Default_State = 1;
+			FSM_Traffic_Light_State_Row = AUTO_RED;
+			FSM_Traffic_Light_State_Col = BLACK_HOLE;
+			setTimer1(TIMER1_SECOND_DURATION * TICK);
+		}
+		break;
 	default:
-		FSM_Traffic_Light_State_Row = AUTO_RED;
+		break;
 	}
 }
 void FSM_Traffic_Light_Col(){
@@ -225,6 +301,6 @@ void FSM_Traffic_Light_Col(){
 		}
 		break;
 	default:
-		FSM_Traffic_Light_State_Col = AUTO_GREEN;
+		break;
 	}
 }
