@@ -33,6 +33,13 @@ int FSM_Pedestrian_State;
 #define BLACK_HOLE		6
 #define IDLE			0
 #define WORK			1
+////////////////Buzzer//////////////////
+int FSM_Buzzer_State;
+int Increase_Duty_Cycle;
+int Increase_Speed;
+#define ON	1
+#define OFF 0
+#define DURATION_ON_TIME 10 //buzzer on in 100ms
 ////////////////Timer//////////////////
 #define TICK	1
 int timer1Counter;
@@ -41,6 +48,8 @@ int timer2Counter;
 int timer2Flag;
 int timer3Counter;
 int timer3Flag;
+int timer4Counter;
+int timer4Flag;
 ///////////////Light time////////////////
 
 int red_time;

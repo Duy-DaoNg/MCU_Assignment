@@ -12,6 +12,8 @@ void FSM_Pedestrian(){
 		if(buttonPressed_flag[3]){
 			buttonPressed_flag[3] = 0;
 			FSM_Pedestrian_State = WORK;
+			FSM_Buzzer_State = ON;
+			setTimer4(1*TICK);
 			setTimer3(2 * TIMER3_PEDESTRIAN_CYCLE * TICK);
 		}
 		break;
@@ -40,8 +42,6 @@ void FSM_Pedestrian(){
 		default:
 			break;
 		}
-		//TODO: Buzzer ....
-
 		break;
 	default:
 		break;

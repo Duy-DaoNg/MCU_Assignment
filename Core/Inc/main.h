@@ -50,6 +50,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -64,8 +66,6 @@ void Error_Handler(void);
 #define BUTTON_MOD_GPIO_Port GPIOA
 #define BUTTON_IC_Pin GPIO_PIN_4
 #define BUTTON_IC_GPIO_Port GPIOA
-#define BUZZER_Pin GPIO_PIN_6
-#define BUZZER_GPIO_Port GPIOA
 #define BUTTON_SET_Pin GPIO_PIN_0
 #define BUTTON_SET_GPIO_Port GPIOB
 #define PEDE_SIGNAL1_Pin GPIO_PIN_10

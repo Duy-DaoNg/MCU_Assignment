@@ -20,6 +20,10 @@ void setTimer3(int duration){
 	timer3Counter = duration/TICK;
 	timer3Flag = 0;
 }
+void setTimer4(int duration){
+	timer4Counter = duration/TICK;
+	timer4Flag = 0;
+}
 void timerRun(){
 	if(timer1Counter > 0){
 		timer1Counter--;
@@ -37,6 +41,12 @@ void timerRun(){
 		timer3Counter--;
 		if(timer3Counter <= 0){
 			timer3Flag = 1;
+		}
+	}
+	if(timer4Counter > 0){
+		timer4Counter--;
+		if(timer4Counter <= 0){
+			timer4Flag = 1;
 		}
 	}
 }

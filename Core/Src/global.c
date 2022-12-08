@@ -15,6 +15,10 @@ int FSM_Button_State = NORMAL_BUTTON;
 int FSM_Traffic_Light_State_Row = AUTO_RED;
 int FSM_Traffic_Light_State_Col = AUTO_GREEN;
 int FSM_Pedestrian_State = IDLE;
+////////////////Buzzer////////////////////
+int FSM_Buzzer_State = OFF;
+int Increase_Duty_Cycle = 99;
+int Increase_Speed = 5;
 ////////////////Timer/////////////////////
 int timer1Counter = 0;
 int timer1Flag = 0;
@@ -22,6 +26,8 @@ int timer2Counter = 0;
 int timer2Flag = 0;
 int timer3Counter = 0;
 int timer3Flag = 0;
+int timer4Counter = 0;
+int timer4Flag = 0;
 ////////////Light time////////////////////
 int red_time = 5;
 int green_time = 3;

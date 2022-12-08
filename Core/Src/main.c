@@ -46,6 +46,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 
@@ -58,6 +59,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -70,6 +72,49 @@ void HAL_UART_RxCpltCallback ( UART_HandleTypeDef * huart ){
 		HAL_UART_Transmit (&huart2, &temp, 1, 50) ;
 		HAL_UART_Receive_IT (&huart2, &temp, 1) ;
 
+	}
+}
+
+void FSM_Buzzer(){
+	/* If Pedestrian button is pressed */
+	if(FSM_Pedestrian_State == WORK && FSM_Traffic_Light_State_Row == AUTO_RED){
+		switch (FSM_Buzzer_State){
+		case ON:
+			/* Turn on Buzzer */
+			if(timer3Flag == 1){
+				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, Increase_Duty_Cycle);
+				Increase_Duty_Cycle += 50;
+				if(Increase_Duty_Cycle >= 999){
+					Increase_Duty_Cycle = 989;
+				}
+				FSM_Buzzer_State = OFF;
+				/* Set time on */
+				setTimer3(DURATION_ON_TIME * TICK);
+			}
+			break;
+		case OFF:
+			/* Turn off Buzzer */
+			if(timer3Flag == 1){
+				FSM_Buzzer_State = ON;
+				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+				if(red_time*TICK*100 <= Increase_Speed){
+					setTimer3(1*TICK);
+					break;
+				}
+				Increase_Speed += 4;
+				/* Set time off */
+				setTimer3(red_time*TICK*100/Increase_Speed);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if(FSM_Pedestrian_State == WORK && FSM_Traffic_Light_State_Row != AUTO_RED){
+		/* Reset all */
+		Increase_Duty_Cycle = 99;
+		Increase_Speed = red_time;
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 	}
 }
 /* USER CODE END 0 */
@@ -104,8 +149,10 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,7 +165,7 @@ int main(void)
 	  FSM_Traffic_Light_Col();
 	  FSM_Pedestrian();
 	  display_traffic_light();
-
+	  FSM_Buzzer();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -207,6 +254,65 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 79;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 999;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 199;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -253,22 +359,15 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, BUZZER_Pin|PEDE_SIGNAL2_Pin|TL1_SIGNAL1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, PEDE_SIGNAL1_Pin|TL1_SIGNAL2_Pin|TL2_SIGNAL2_Pin|TL2_SIGNAL1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, PEDE_SIGNAL1_Pin|TL1_SIGNAL2_Pin|TL2_SIGNAL2_Pin|TL2_SIGNAL1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PEDE_SIGNAL2_Pin|TL1_SIGNAL1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : BUTTON_PEDE_Pin BUTTON_MOD_Pin BUTTON_IC_Pin */
   GPIO_InitStruct.Pin = BUTTON_PEDE_Pin|BUTTON_MOD_Pin|BUTTON_IC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : BUZZER_Pin PEDE_SIGNAL2_Pin TL1_SIGNAL1_Pin */
-  GPIO_InitStruct.Pin = BUZZER_Pin|PEDE_SIGNAL2_Pin|TL1_SIGNAL1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BUTTON_SET_Pin */
@@ -283,6 +382,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PEDE_SIGNAL2_Pin TL1_SIGNAL1_Pin */
+  GPIO_InitStruct.Pin = PEDE_SIGNAL2_Pin|TL1_SIGNAL1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 
