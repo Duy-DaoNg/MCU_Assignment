@@ -1,0 +1,75 @@
+!SESSION 2022-12-09 09:12:05.937 -----------------------------------------------
+eclipse.buildId=Version 1.7.0
+java.version=11.0.10
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  F:\Minh Duc\STUDY\HCMUT\Junior\221\MPU - MCU\Assignment\MCU_Assignment\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 F:\Minh Duc\STUDY\HCMUT\Junior\221\MPU - MCU\Assignment\MCU_Assignment\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-12-09 09:13:42.932
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-12-09 09:13:43.041
+!MESSAGE Log4j initialized with config file F:\Minh Duc\STUDY\HCMUT\Junior\221\MPU - MCU\Assignment\MCU_Assignment\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-12-09 09:13:54.468
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.resources 4 274 2022-12-09 09:16:38.959
+!MESSAGE Could not set the project description for 'Assignment' because the project description file (.project) is out of sync with the file system.
+!STACK 0
+java.lang.Exception: Could not set the project description for 'Assignment' because the project description file (.project) is out of sync with the file system.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Project.setDescription(Project.java:1264)
+	at org.eclipse.core.internal.resources.Project.setDescription(Project.java:1298)
+	at com.st.stm32cube.common.projectcreation.core.ProjectUtilities.setProjectNature(ProjectUtilities.java:268)
+	at com.st.stm32cube.common.projectcreation.core.ProjectUtilities.setProjectLanguage(ProjectUtilities.java:73)
+	at com.st.stm32cube.ide.common.services.project.ProjectUpdateService.doProjectUpdate(ProjectUpdateService.java:35)
+	at com.st.stm32cube.ide.common.services.project.HierarchicalProjectTreeSetupService.HierarchicalProjectTreeSetup(HierarchicalProjectTreeSetupService.java:138)
+	at com.st.stm32cube.ide.common.services.project.HierarchicalProjectTreeUpdateService.doProjectUpdate(HierarchicalProjectTreeUpdateService.java:41)
+	at com.st.stm32cube.ide.common.services.adapted.core.project.ProjectUpdateRcpServiceProcess.doProjectUpdate(ProjectUpdateRcpServiceProcess.java:245)
+	at com.st.stm32cube.ide.common.services.adapted.core.project.ProjectUpdateRcpServiceProcess.doProjectUpdate(ProjectUpdateRcpServiceProcess.java:239)
+	at com.st.stm32cube.ide.common.services.adapted.core.project.ProjectUpdateRcpServiceProcess.doProjectUpdate(ProjectUpdateRcpServiceProcess.java:170)
+	at com.st.stm32cube.ide.common.services.adapted.core.project.ProjectUpdateRcpServiceProcess.run(ProjectUpdateRcpServiceProcess.java:121)
+	at com.st.stm32cube.ide.common.services.mx.core.project.ProjectUpdateRcpService.doProjectUpdate(ProjectUpdateRcpService.java:204)
+	at com.st.stm32cube.ide.common.services.mx.core.project.ProjectUpdateRcpService.run(ProjectUpdateRcpService.java:166)
+	at com.st.stm32cube.ide.common.services.mx.update.MxUpdateProjectRcpService.run(MxUpdateProjectRcpService.java:93)
+	at com.st.stm32cube.ide.mcu.ide.process.MxIdePlugInProjectGeneratorAbstract.doExecute(MxIdePlugInProjectGeneratorAbstract.java:346)
+	at com.st.stm32cube.ide.mcu.ide.process.MxIdePlugInProjectGeneratorAbstract.doUpdate(MxIdePlugInProjectGeneratorAbstract.java:217)
+	at com.st.stm32cube.ide.mcu.ide.process.MxIdePlugInProjectGeneratorAbstract.update(MxIdePlugInProjectGeneratorAbstract.java:92)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.st.microxplorer.plugins.projectmanager.model.ToolchainGenerator.CallMethod(ToolchainGenerator.java:265)
+	at com.st.microxplorer.plugins.projectmanager.model.ToolchainGenerator.update(ToolchainGenerator.java:449)
+	at com.st.microxplorer.plugins.projectmanager.engine.ProjectBuilder.createToolChainFolders(ProjectBuilder.java:3745)
+	at com.st.microxplorer.plugins.projectmanager.engine.ProjectBuilder.createProject(ProjectBuilder.java:782)
+	at com.st.microxplorer.plugins.projectmanager.engine.ProjectBuilder.createProject(ProjectBuilder.java:434)
+	at com.st.microxplorer.plugins.projectmanager.engine.MainProjectManager.startGenerateCode(MainProjectManager.java:1508)
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor.doGenerate(CubeMxEditor.java:2446)
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor$20.run(CubeMxEditor.java:2166)
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.AwtEnvironment$2.run(AwtEnvironment.java:166)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:740)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+!ENTRY com.st.stm32cube.ide.common.services 4 0 2022-12-09 09:16:38.959
+!MESSAGE Project is required
+
+!ENTRY com.st.stm32cube.ide.common.services 4 0 2022-12-09 09:16:38.959
+!MESSAGE Project is required
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-12-09 09:16:46.767
+!MESSAGE Indexed 'Assignment' (26 sources, 103 headers) in 5.54 sec: 7,959 declarations; 39,525 references; 6 unresolved inclusions; 306 syntax errors; 1,204 unresolved names (2.5%)
