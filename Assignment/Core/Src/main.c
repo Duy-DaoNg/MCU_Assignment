@@ -6,13 +6,27 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2022 ST-+
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  * Microelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+
+
+
+
+
+
+
+
+';\;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;           opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -116,6 +130,11 @@ void FSM_Buzzer(){
 		Increase_Speed = red_time;
 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 	}
+	else{
+		Increase_Duty_Cycle = 99;
+		Increase_Speed = red_time;
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+	}
 }
 /* USER CODE END 0 */
 
@@ -159,6 +178,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer1(100);
   setTimer2(100);
+//  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
   while (1)
   {
 	  FSM_Traffic_Light_Row();
@@ -166,6 +186,27 @@ int main(void)
 	  FSM_Pedestrian();
 	  display_traffic_light();
 	  FSM_Buzzer();
+
+//	  if(buttonPressed_flag[3]){
+//		  buttonPressed_flag[3] = 0;
+//			HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, RESET);
+//			HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
+//	  }
+//	  if(buttonPressed_flag[2]){
+//		  buttonPressed_flag[2] = 0;
+//			HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
+//			HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, RESET);
+//	  }
+//	  if(buttonPressed_flag[1]){
+//		  buttonPressed_flag[1] = 0;
+//			HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
+//			HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
+//	  }
+//	  if(buttonPressed_flag[0]){
+//		  buttonPressed_flag[0] = 0;
+//			HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
+//			HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
+//	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -369,13 +410,13 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BUTTON_PEDE_Pin BUTTON_MOD_Pin BUTTON_IC_Pin */
   GPIO_InitStruct.Pin = BUTTON_PEDE_Pin|BUTTON_MOD_Pin|BUTTON_IC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BUTTON_SET_Pin */
   GPIO_InitStruct.Pin = BUTTON_SET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BUTTON_SET_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PEDE_SIGNAL1_Pin TL1_SIGNAL2_Pin TL2_SIGNAL2_Pin TL2_SIGNAL1_Pin */

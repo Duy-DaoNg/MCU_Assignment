@@ -9,6 +9,8 @@
 void FSM_Pedestrian(){
 	switch(FSM_Pedestrian_State){
 	case IDLE:
+		HAL_GPIO_WritePin(PEDE_SIGNAL1_GPIO_Port, PEDE_SIGNAL1_Pin, RESET);
+		HAL_GPIO_WritePin(PEDE_SIGNAL2_GPIO_Port, PEDE_SIGNAL2_Pin, RESET);
 		if(buttonPressed_flag[3]){
 			buttonPressed_flag[3] = 0;
 			FSM_Pedestrian_State = WORK;
