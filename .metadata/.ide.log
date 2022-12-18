@@ -3263,3 +3263,7 @@
 2022-12-17 17:34:50,843 [INFO] IPUIPlugin:74 - create IPUIPlugin
 2022-12-17 17:34:51,015 [INFO] OpenFileManager:333 - Restore cursor
 2022-12-17 17:34:55,598 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-12-18 09:43:45,310 [INFO] Activator:177 - 
+
+
+2022-12-18 09:43:45,325 [INFO] Activator:178 - !SESSION log4j initialized
