@@ -7,7 +7,25 @@
 
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
+
 #include "main.h"
+#include "button_reading.h"
+#include "fsm_traffic_light.h"
+#include "timer.h"
+#include "display_traffic_light.h"
+#include "fsm_pedestrian.h"
+#include "stdlib.h"
+#include <stdio.h>
+#include "string.h"
+#include "buzzer.h"
+#include "uart.h"
+
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
+
+UART_HandleTypeDef huart2;
+
+char str[30];
 
 
 //////////////BUTTON///////////////////
@@ -53,6 +71,8 @@ int timer3Counter;
 int timer3Flag;
 int timer4Counter;
 int timer4Flag;
+int timer5Counter;
+int timer5Flag;
 ///////////////Light time////////////////
 
 int red_time;

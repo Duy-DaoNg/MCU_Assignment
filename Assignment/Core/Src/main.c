@@ -37,11 +37,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "global.h"
-#include "button_reading.h"
-#include "fsm_traffic_light.h"
-#include "timer.h"
-#include "display_traffic_light.h"
-#include "fsm_pedestrian.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,10 +54,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
-
-UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
@@ -80,62 +71,7 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t temp = 0;
-void HAL_UART_RxCpltCallback ( UART_HandleTypeDef * huart ){
-	if( huart -> Instance == USART2 ) {
-		HAL_UART_Transmit (&huart2, &temp, 1, 50) ;
-		HAL_UART_Receive_IT (&huart2, &temp, 1) ;
 
-	}
-}
-
-void FSM_Buzzer(){
-	/* If Pedestrian button is pressed */
-	if(FSM_Pedestrian_State == WORK && FSM_Traffic_Light_State_Row == AUTO_RED){
-		switch (FSM_Buzzer_State){
-		case ON:
-			/* Turn on Buzzer */
-			if(timer4Flag == 1){
-				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, Increase_Duty_Cycle);
-				Increase_Duty_Cycle += 50;
-				if(Increase_Duty_Cycle >= 999){
-					Increase_Duty_Cycle = 989;
-				}
-				FSM_Buzzer_State = OFF;
-				/* Set time on */
-				setTimer4(DURATION_ON_TIME * TICK);
-			}
-			break;
-		case OFF:
-			/* Turn off Buzzer */
-			if(timer4Flag == 1){
-				FSM_Buzzer_State = ON;
-				__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-				if(red_time*TICK*100 <= Increase_Speed){
-					setTimer4(1*TICK);
-					break;
-				}
-				Increase_Speed += 4;
-				/* Set time off */
-				setTimer4(red_time*TICK*100/Increase_Speed);
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	else if(FSM_Pedestrian_State == WORK && FSM_Traffic_Light_State_Row != AUTO_RED){
-		/* Reset all */
-		Increase_Duty_Cycle = 99;
-		Increase_Speed = red_time;
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-	}
-	else{
-		Increase_Duty_Cycle = 99;
-		Increase_Speed = red_time;
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-	}
-}
 /* USER CODE END 0 */
 
 /**
@@ -172,12 +108,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer1(100);
   setTimer2(100);
+  setTimer5(100);
 //  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
   while (1)
   {
@@ -186,7 +124,9 @@ int main(void)
 	  FSM_Pedestrian();
 	  display_traffic_light();
 	  FSM_Buzzer();
-
+//	  if (timer5Flag){
+//		  HAL_UART_Transmit(&huart2, (void *) str, sprintf(str, "OK\r\n"), 1000 );
+//	  }
 //	  if(buttonPressed_flag[3]){
 //		  buttonPressed_flag[3] = 0;
 //			HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, RESET);
@@ -316,7 +256,7 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 79;
+  htim3.Init.Prescaler = 63;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 999;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

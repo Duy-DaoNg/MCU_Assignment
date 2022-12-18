@@ -21,11 +21,13 @@ void changeTime(){
 		Set_TL_Time = 1;
 	}
 }
+
 void FSM_Traffic_Light_Row(){
 	switch (FSM_Traffic_Light_State_Row) {
 	case AUTO_RED:
 		if(timer1Flag == 1){
 			/* Count down time */
+			uart_transmit();
 			traffic_light_remain_time_row--;
 			if(traffic_light_remain_time_row == 0){
 				/* Move to next state*/
@@ -56,6 +58,7 @@ void FSM_Traffic_Light_Row(){
 	case AUTO_GREEN:
 		if(timer1Flag == 1){
 			/* Count down time */
+			uart_transmit();
 			traffic_light_remain_time_row--;
 			if(traffic_light_remain_time_row == 0){
 				/* Move to next state*/
@@ -84,6 +87,7 @@ void FSM_Traffic_Light_Row(){
 	case AUTO_YEL:
 		if(timer1Flag == 1){
 			/* Count down time */
+			uart_transmit();
 			traffic_light_remain_time_row--;
 			if(traffic_light_remain_time_row == 0){
 				/* Move to next state*/
@@ -112,6 +116,7 @@ void FSM_Traffic_Light_Row(){
 	case MANUAL_RED:
 		if(timer1Flag == 1){
 			/* Back to default state */
+			uart_transmit();
 			FSM_Traffic_Light_State_Row = AUTO_RED;
 			traffic_light_remain_time_row = red_time;
 			To_Default_State = 1;
@@ -127,6 +132,7 @@ void FSM_Traffic_Light_Row(){
 		}
 		if(buttonPressed_flag[1]){
 			/* INC. time */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			changeTime();
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
@@ -141,6 +147,7 @@ void FSM_Traffic_Light_Row(){
 	case MANUAL_GREEN:
 		if(timer1Flag == 1){
 			/* Back to default state */
+			uart_transmit();
 			FSM_Traffic_Light_State_Row = AUTO_RED;
 			To_Default_State = 1;
 			traffic_light_remain_time_row = red_time;
@@ -156,6 +163,7 @@ void FSM_Traffic_Light_Row(){
 		}
 		if(buttonPressed_flag[1]){
 			/* INC. time */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			changeTime();
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
@@ -170,6 +178,7 @@ void FSM_Traffic_Light_Row(){
 	case MANUAL_YEL:
 		if(timer1Flag == 1){
 			/* Back to default state */
+			uart_transmit();
 			FSM_Traffic_Light_State_Row = AUTO_RED;
 			To_Default_State = 1;
 			traffic_light_remain_time_row = red_time;
@@ -187,6 +196,7 @@ void FSM_Traffic_Light_Row(){
 		}
 		if(buttonPressed_flag[1]){
 			/* INC. time */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			changeTime();
 			setTimer1(TIMER1_10SECOND_DURATION * TICK);
@@ -201,6 +211,7 @@ void FSM_Traffic_Light_Row(){
 	case HAND_RED:
 		if(buttonPressed_flag[1]){
 			/* Move to next state of HAND MODE */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			FSM_Traffic_Light_State_Row = HAND_GREEN;
 			FSM_Traffic_Light_State_Col = HAND_RED;
@@ -220,6 +231,7 @@ void FSM_Traffic_Light_Row(){
 	case HAND_GREEN:
 		if(buttonPressed_flag[1]){
 			/* Move to next state of HAND MODE */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			FSM_Traffic_Light_State_Row = HAND_YEL;
 			FSM_Traffic_Light_State_Col = HAND_YEL;
@@ -239,6 +251,7 @@ void FSM_Traffic_Light_Row(){
 	case HAND_YEL:
 		if(buttonPressed_flag[1]){
 			/* Move to next state of HAND MODE */
+			uart_transmit();
 			buttonPressed_flag[1] = 0;
 			FSM_Traffic_Light_State_Row = HAND_RED;
 			FSM_Traffic_Light_State_Col = HAND_GREEN;
