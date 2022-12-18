@@ -54,13 +54,12 @@ void timerRun(){
 			timer4Flag = 1;
 		}
 	}
-<<<<<<< HEAD
+
     if(timer5Counter > 0){
         timer5Counter--;
         if(timer5Counter <= 0){
             timer5Flag = 1;
         }
     }
-=======
->>>>>>> 396cf1c5965e48fa8af233346bebd5f199b1c28c
+
 }
