@@ -10,14 +10,14 @@
 
 void FSM_Pedestrian(){
     switch(FSM_Pedestrian_State){
-    case IDLE:
-        HAL_GPIO_WritePin(PEDE_SIGNAL1_GPIO_Port, PEDE_SIGNAL1_Pin, RESET);
-        HAL_GPIO_WritePin(PEDE_SIGNAL2_GPIO_Port, PEDE_SIGNAL2_Pin, RESET);
+    case IDLE:                                                                                           // Start
+        HAL_GPIO_WritePin(PEDE_SIGNAL1_GPIO_Port, PEDE_SIGNAL1_Pin, RESET);                              // Turn off
+        HAL_GPIO_WritePin(PEDE_SIGNAL2_GPIO_Port, PEDE_SIGNAL2_Pin, RESET);                              // Turn off
         if(buttonPressed_flag[3]){
             buttonPressed_flag[3] = 0;
             FSM_Pedestrian_State = WORK;
             FSM_Buzzer_State = ON;
-            setTimer4(1*TICK);
+            setTimer4(1*TICK);                                                                           
             setTimer3(2 * TIMER3_PEDESTRIAN_CYCLE * TICK);
         }
         break;
