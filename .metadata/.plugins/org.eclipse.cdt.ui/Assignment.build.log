@@ -1,4 +1,4 @@
-20:07:37 **** Incremental Build of configuration Debug for project Assignment ****
+16:10:48 **** Incremental Build of configuration Debug for project Assignment ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/button_reading.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/button_reading.d" -MT"Core/Src/button_reading.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/button_reading.o"
 arm-none-eabi-gcc "../Core/Src/buzzer.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/buzzer.d" -MT"Core/Src/buzzer.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/buzzer.o"
@@ -17,15 +17,15 @@ arm-none-eabi-objdump -h -S  Assignment.elf  > "Assignment.list"
 arm-none-eabi-objcopy  -O ihex  Assignment.elf  "Assignment.hex"
 arm-none-eabi-objcopy  -O binary  Assignment.elf  "Assignment.bin"
    text	   data	    bss	    dec	    hex	filename
-  18828	    164	   1924	  20916	   51b4	Assignment.elf
+  18596	    168	   1920	  20684	   50cc	Assignment.elf
 Finished building: default.size.stdout
  
-Finished building: Assignment.hex
 Finished building: Assignment.bin
+Finished building: Assignment.hex
  
  
 Finished building: Assignment.list
  
 
-20:07:42 Build Finished. 0 errors, 0 warnings. (took 5s.328ms)
+16:10:57 Build Finished. 0 errors, 0 warnings. (took 9s.173ms)
 

@@ -35,3 +35,5 @@ int yellow_time = 2;
 int traffic_light_remain_time_row = 5;
 int traffic_light_remain_time_col = 3;
 int Set_TL_Time = 0;
+////////////Pedestrian mode time////////////////////
+int TIMER3_PEDESTRIAN_CYCLE = 1000;
