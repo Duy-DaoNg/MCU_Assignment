@@ -26,7 +26,7 @@ void FSM_Pedestrian(){
 
     /* WORK MODE */
     case WORK:
-        if(timer3Flag == 1 || buttonPressed_flag[0] || buttonPressed_flag[1]){			// 2 cycles passed without pressing the button or MODE changed to SET or MANUAL
+        if(timer3Flag == 1){		// 2 cycles passed without pressing the button
             FSM_Pedestrian_State = IDLE;
             break;
         }
