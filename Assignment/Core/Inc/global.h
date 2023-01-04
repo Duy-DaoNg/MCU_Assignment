@@ -19,7 +19,6 @@
 #include "string.h"
 #include "buzzer.h"
 #include "uart.h"
-#include "scheduler.h"
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
