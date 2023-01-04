@@ -1,6 +1,6 @@
-17:43:28 **** Incremental Build of configuration Debug for project Assignment ****
+12:41:37 **** Incremental Build of configuration Debug for project Assignment ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/buzzer.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/buzzer.d" -MT"Core/Src/buzzer.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/buzzer.o"
 arm-none-eabi-gcc -o "Assignment.elf" @"objects.list"   -mcpu=cortex-m3 -T"F:\Minh Duc\STUDY\HCMUT\Junior\221\MPU - MCU\Assignment\MCU_Assignment\Assignment\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Assignment.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Assignment.elf
  
@@ -9,15 +9,15 @@ arm-none-eabi-objdump -h -S  Assignment.elf  > "Assignment.list"
 arm-none-eabi-objcopy  -O ihex  Assignment.elf  "Assignment.hex"
 arm-none-eabi-objcopy  -O binary  Assignment.elf  "Assignment.bin"
    text	   data	    bss	    dec	    hex	filename
-  19592	    168	   2144	  21904	   5590	Assignment.elf
+  18512	    160	   1920	  20592	   5070	Assignment.elf
 Finished building: default.size.stdout
+Finished building: Assignment.bin
 Finished building: Assignment.hex
  
  
-Finished building: Assignment.bin
  
 Finished building: Assignment.list
  
 
-17:43:30 Build Finished. 0 errors, 0 warnings. (took 2s.231ms)
+12:41:39 Build Finished. 0 errors, 0 warnings. (took 1s.992ms)
 
