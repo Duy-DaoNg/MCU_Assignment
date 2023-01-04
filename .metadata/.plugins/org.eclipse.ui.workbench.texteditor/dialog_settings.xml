@@ -8,6 +8,11 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="display"/>
+			<item value="To_Default_State"/>
+			<item value="To_Default "/>
+			<item value="HAND"/>
+			<item value="uart"/>
 			<item value="Pedestrian"/>
 			<item value="ped"/>
 			<item value="pedse"/>
@@ -17,6 +22,7 @@
 			<item value="huart1"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SET"/>
 			<item value="huart2"/>
 		</list>
 	</section>

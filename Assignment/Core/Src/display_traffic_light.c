@@ -17,7 +17,7 @@ void display_traffic_light(){
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, RESET);
 		break;
-	case MANUAL_RED:
+	case SET_RED:
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, RESET);
 		HAL_GPIO_WritePin(TL2_SIGNAL1_GPIO_Port, TL2_SIGNAL1_Pin, SET);
@@ -31,7 +31,7 @@ void display_traffic_light(){
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, RESET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
 		break;
-	case MANUAL_GREEN:
+	case SET_GREEN:
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, RESET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
 		HAL_GPIO_WritePin(TL2_SIGNAL1_GPIO_Port, TL2_SIGNAL1_Pin, RESET);
@@ -45,7 +45,7 @@ void display_traffic_light(){
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
 		break;
-	case MANUAL_YEL:
+	case SET_YEL:
 		HAL_GPIO_WritePin(TL1_SIGNAL1_GPIO_Port, TL1_SIGNAL1_Pin, SET);
 		HAL_GPIO_WritePin(TL1_SIGNAL2_GPIO_Port, TL1_SIGNAL2_Pin, SET);
 		HAL_GPIO_WritePin(TL2_SIGNAL1_GPIO_Port, TL2_SIGNAL1_Pin, SET);

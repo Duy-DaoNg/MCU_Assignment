@@ -54,12 +54,4 @@ void timerRun(){
 			timer4Flag = 1;
 		}
 	}
-
-    if(timer5Counter > 0){
-        timer5Counter--;
-        if(timer5Counter <= 0){
-            timer5Flag = 1;
-        }
-    }
-
 }
