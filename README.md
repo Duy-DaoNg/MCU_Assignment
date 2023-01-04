@@ -1,6 +1,6 @@
 # MCU_MPU Assignment: Traffic light
 ## Author
-* Đào Nguuyễn Đức Duy - 2012811
+* Đào Nguyễn Đức Duy - 2012811
 * Quách Minh Đức - 2010231
 * Huỳnh Lâm Minh Đức - 2010228
 
